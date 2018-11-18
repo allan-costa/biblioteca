@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+
+    <!--FIREBASE-->
+    <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+
+    <div id='div-must-auth' class="login-form col-xs-10 offset-xs-1 col-sm-6 offset-sm-3 col-md-4 offset-md-4">
+        <header>
+            <h1><img src="img/logo3.png" class="img-fluid"> </h1>
+            <h2 class="text-center">Entre com seu <b>usuário</b> e <b>senha</b></h2>
+        </header>
+        <form>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><span class="fas fa-user"></span></span>
+                </div>
+                <input type="email" id="usuario" class="form-control" placeholder="Usuario" aria-label="Usuario" aria-describedby="basic-addon1" required autofocus>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><span class="fas fa-key"></span></span>
+                </div>
+                <input type="password" id="senha" class="form-control" placeholder="Senha" aria-label="Senha" aria-describedby="basic-addon1" required>
+            </div>
+
+            <footer>
+
+                <div class=text-none>
+                    <button onclick="autenticarUsuario()" id="btnLogin" class="btn btn-primary ">Entrar</button>
+                </div>
+
+                <p id='infoLogin' style="color:red;"></p>
+
+                <a href="#" class="forgot-password">
+                        Esqueceu a senha?
+                </a>
+                <div class="copyright text-center my-auto">
+                    <span>Copyright © PROJETO FINAL CURSO - ESPECIALIZACAO WEB E MOBILE UFG 2018</span>
+                </div>
+            </footer>
+        </form>
+    </div>
+
+    <script src='js/firebase.js'></script>
+    <script src='js/login.js'></script>
+    <script src="js/jquery-3.3.1.min.js "></script>
+
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+body {
+    min-height: 100vh;
+    background-color: whitesmoke;
+}
+
+.search-form {
+    padding: 20px 30px;
+    background-color: white;
+    margin-top: 30vh;
+    transform: translateY(-50%);
+    color: darkgray
+}
+
+.resultado-pesquisa {
+    margin-top: 1vh;
+    transform: translateY(-50%);
+    float: left;
+}
+
+#div-resultado-pesquisa {
+    display: none;
+}
+
+.search-form h1 {
+    margin: 0 0 5px;
+}
+
+.search-form h2 {
+    margin: 0 0 30px;
+    font-size: 2em;
+}
+
+
+/* Media queries para resolucoes muito pequenas*/
+
+@media (max-width: 415px) {
+    .resultado-pesquisa {
+        margin-top: 5vh;
+        width: 100%;
+    }
+}

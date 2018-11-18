@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Biblioteca v1.0 </title>
+
+    <!--FIREBASE-->
+    <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- font awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+    <!-- CSS comum para todos-->
+    <link href="css/util.css" rel="stylesheet">
+
+</head>
+
+<body onload="pesquisarBibliotecas()" id="page-top">
+
+    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+        <a class="navbar-brand mr-1" href="index.html">Biblioteca Web </a>
+
+        <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+        <i class="fas fa-bars"></i>
+      </button>
+
+        <!-- Navbar Search -->
+        <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Busca rápida..." aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button">
+              <i class="fas fa-search"></i>
+            </button>
+                </div>
+            </div>
+        </form>
+
+        <span id="usuarioLogado" class="navbar-text">  </span>
+
+        <!-- Navbar -->
+        <ul class="navbar-nav ml-auto ml-md-0">
+            <li class="nav-item dropdown no-arrow mx-1">
+                <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-envelope fa-fw"></i>
+                    <span class="badge badge-danger">7</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
+                    <a class="dropdown-item" href="lista-mensagem">Ver mensagens</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="enviar-mensagem">Enviar mensagem</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown no-arrow">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user-circle fa-fw"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="configuracao-usuario.html">Configuração</a>
+                    <a class="dropdown-item" href="log-atividade.html">Log de atividade</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Sair</a>
+                </div>
+            </li>
+        </ul>
+
+    </nav>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="sidebar navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Início</span>
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-fw fa-book"></i>
+                    <span>Cadastros</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                    <h6 class="dropdown-header ">Básico:</h6>
+                    <a class="dropdown-item" href="cadastro-pessoa.html">Pessoa</a>
+                    <a class="dropdown-item active" href="cadastro-biblioteca.html">Biblioteca</a>
+                    <div class="dropdown-divider"></div>
+                    <h6 class="dropdown-header">Especifico:</h6>
+                    <a class="dropdown-item" href="cadastro-autor.html">Autor</a>
+                    <a class="dropdown-item" href="cadastro-editora.html">Editora</a>
+                    <a class="dropdown-item " href="cadastro-catalogo.html">Catálogo</a>
+
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="emprestimo.html">
+                    <i class="fas fa-fw fa-book-reader"></i>
+                    <span>Empréstimos </span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="multa.html">
+                    <i class="fas fa-fw fa-dollar-sign"></i>
+                    <span>Multas</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="relatorio.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Relatórios </span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="ajuda.html">
+                    <i class="fas fa-fw fa-question"></i>
+                    <span>Ajuda </span></a>
+            </li>
+        </ul>
+
+        <div id="content-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Breadcrumbs-->
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">Cadastros</li>
+                    <li class="breadcrumb-item active">Biblioteca</li>
+                </ol>
+
+                <!-- Page Content -->
+                <!-- Page Nav -->
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="pills-pesquisar-pessoa" data-toggle="pill" href="#pills-pesquisar" role="tab" aria-controls="pills-pesquisar" aria-selected="true">Bibliotecas em uso</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-gravar-biblioteca" data-toggle="pill" href="#pills-gravar" role="tab" aria-controls="pills-gravar" aria-selected="false">Nova biblioteca</a>
+                    </li>
+                </ul>
+
+                <!-- Page Content -->
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-pesquisar" role="tabpanel">
+
+                        <small id="info-pesquisa" class="form-text text-primary"></small>
+                        <!--Tabela com Bibliotecas-->
+                        <div id="resultado-pesquisa">
+                            <table id='tabela-bibliotecas' class="table table-responsive-sm col-md-6 mb-6">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nome</th>
+                                        <th>Instituição</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id='tbody'>
+                                </tbody>
+                            </table>
+                        </div>
+                        <small id="info-exclusao-biblioteca" class="form-text text-success"></small>
+                    </div>
+
+                    <!--Nova Biblioteca-->
+                    <div class="tab-pane fade " id="pills-gravar" role="tabpanel" aria-labelledby="pills-gravar-biblioteca">
+                        <form class="needs-validation" novalidate>
+
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label>Nome</label>
+                                    <input type="text" class="form-control" id="nome-biblioteca" placeholder="" required>
+                                    <div class="invalid-feedback">
+                                        Campo Obrigatório!
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-3 mb-3">
+                                    <label for="inputState">Funcionamento</label>
+                                    <select id="turno-biblioteca" class="form-control" required>
+                                        <option selected>Integral</option>
+                                        <option>Matutino</option>
+                                        <option>Vespertino</option>
+                                        <option>Noturno</option>
+                                        <div class="invalid-feedback">
+                                                Campo Obrigatório!
+                                        </div>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <div class="form-row">
+
+                                <div class="col-md-6 mb-3">
+                                    <label>Endereço</label>
+                                    <input type="text" class="form-control" id="endereco-biblioteca" placeholder="Cidade, setor, rua, numero">
+                                </div>
+
+                                <div class="col-md-4 mb-4">
+                                    <label>Instituição</label>
+                                    <input type="text" class="form-control" id="instituicao-biblioteca" placeholder="">
+                                </div>
+
+                            </div>
+
+                            <div class="form-row">
+
+                                <div class="col-md-3 mb-3">
+                                    <label>Telefone</label>
+                                    <input type="text" class="form-control" id="telefone-biblioteca" placeholder="(62)9999-9999" required>
+                                    <div class="invalid-feedback">
+                                        Campo Obrigatório!
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                    <label>E-mail</label>
+                                    <input type="text" class="form-control" id="email-biblioteca" placeholder="exemplo@gmail.com">
+                                    <div class="invalid-feedback">
+                                        Campo Obrigatório!
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 mb-4">
+                                    <label>Responsável</label>
+                                    <input type="text" class="form-control" id="responsavel-biblioteca">
+                                    <div class="invalid-feedback">
+                                        Campo Obrigatório!
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <button onclick="gravarBiblioteca(`NOVO`)" id="gravar-biblioteca" class="btn btn-primary" type="button">Gravar</button>
+                            <button onclick="limparMensagens()" id="limpar-biblioteca" class="btn btn-warning" type="reset">Limpar</button>
+                        </form>
+                        <small id="info-cadastro-biblioteca" class="form-text text-success"></small>
+                    </div>
+                    <!--Fim pills-gravar-->
+
+                </div>
+                <!--Fim pills-tabContent-->
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright © PROJETO FINAL CURSO - ESPECIALIZACAO WEB E MOBILE UFG 2018</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Finalizar a sessão atual?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+                </div>
+                <div class="modal-body">Clique no botão "Sair" logo abaixo se você realmente deseja encerrar a sessão.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" onclick="logOut()">Sair</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div data-backdrop="static" class="modal" id="modal-editar-biblioteca">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Alterar Dados Biblioteca</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form class="needs-validation" novalidate>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-6">
+                                <label>ID</label>
+                                <input type="text" class="form-control" id="editar-id-biblioteca" placeholder="" disabled>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-8 mb-8">
+                                <label>Nome</label>
+                                <input type="text" class="form-control" id="editar-nome-biblioteca" placeholder="" required>
+                                <div class="invalid-feedback">
+                                    Campo Obrigatório!
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4 mb-4">
+                                <label for="inputState">Turno</label>
+                                <select id="editar-turno-biblioteca" class="form-control" required>
+                                    <option selected>Integral</option>
+                                    <option>Matutino</option>
+                                    <option>Vespertino</option>
+                                    <option>Noturno</option>
+                                    <div class="invalid-feedback">
+                                         Campo Obrigatório!
+                                    </div>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="col-md-6 mb-6">
+                                <label>Endereço</label>
+                                <input type="text" class="form-control" id="editar-endereco-biblioteca" placeholder="Cidade, setor, rua, numero">
+                            </div>
+
+                            <div class="col-md-6 mb-6">
+                                <label>Instituição</label>
+                                <input type="text" class="form-control" id="editar-instituicao-biblioteca" placeholder="">
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="col-md-4 mb-4">
+                                <label>Telefone</label>
+                                <input type="text" class="form-control" id="editar-telefone-biblioteca" placeholder="(62)9999-9999" required>
+                                <div class="invalid-feedback">
+                                    Campo Obrigatório!
+                                </div>
+                            </div>
+
+                            <div class="col-md-8 mb-8">
+                                <label>E-mail</label>
+                                <input type="text" class="form-control" id="editar-email-biblioteca" placeholder="exemplo@gmail.com">
+                                <div class="invalid-feedback">
+                                    Campo Obrigatório!
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-6">
+                                <label>Responsável</label>
+                                <input type="text" class="form-control" id="editar-responsavel-biblioteca">
+                                <div class="invalid-feedback">
+                                    Campo Obrigatório!
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <small id="info-editar-biblioteca" class="form-text text-success"></small>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button onclick="gravarAlteracao()" id="editar-alteracao-biblioteca" class="btn btn-primary" type="submit">Gravar</button>
+                    <button onclick="limparMensagens()" type="button" class="btn btn-danger" data-dismiss="modal">Sair</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="js/login.js "></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin.min.js "></script>
+
+    <script src='js/firebase.js'></script>
+
+    <!-- Custom scripts biblioteca-->
+    <script src="js/biblioteca.js "></script>
+
+
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+</body>
+
+</html>

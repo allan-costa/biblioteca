@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Biblioteca - Pesquisa de livros </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/app.css">
+
+    <!--FIREBASE-->
+    <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:lightsteelblue;">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+        <a class="navbar-brand" href="#">Biblioteca logo</a>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+
+                </li>
+
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <button class="btn btn-primary" onclick="location.href='login.html';" type="button">Acessar o sistema</button>
+            </form>
+        </div>
+    </nav>
+
+    <header>
+        <div id='div-search' class="search-form col-xs-10 offset-xs-1 col-sm-6 offset-sm-3 col-md-4 offset-md-4">
+
+            <h2>Pesquisar <i class="fas fa-book"></i></h2>
+
+            <div class="form-group">
+                <input type="text" value="" class="form-control" id="searchInput" onkeydown="teclaEnter(event)" placeholder="Informe o nome do livro para busca" required autofocus>
+            </div>
+            <button onclick="pesquisarLivros()" type="submit" class="btn btn-outline-success my-2 my-sm-0">Pesquisar</button>
+            <small id="result-info" class="form-text text-primary"></small>
+
+        </div>
+
+    </header>
+
+    <section>
+
+        <div id='resultado-pesquisa' class="resultado-pesquisa table-responsive col-xs-10 offset-xs-1 col-sm-6 offset-sm-3 col-md-6 offset-md-4">
+
+            <table id='tabela-resultado-pesquisa' class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Titulo</th>
+                        <th scope="col">Autor</th>
+                        <th scope="col">Situação </th>
+                        <th scope="col">Reservar </th>
+                    </tr>
+                </thead>
+                <tbody id='tbody'>
+
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <script src='js/firebase.js'></script>
+    <script src="js/pesquisa.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/sweetalert2.min.js"></script>
+
+</body>
+
+
+</html>

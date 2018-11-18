@@ -1,0 +1,25 @@
+body {
+    min-height: 100vh;
+    background-color: whitesmoke;
+}
+
+.login-form {
+    padding: 20px 30px;
+    background-color: white;
+    margin-top: 50vh;
+    transform: translateY(-50%);
+    color: darkgray
+}
+
+.login-form h1 {
+    margin: 0 0 5px;
+}
+
+.login-form h2 {
+    margin: 0 0 30px;
+    font-size: 1em;
+}
+
+.forgot-password {
+    color: rgb(104, 145, 162);
+}
