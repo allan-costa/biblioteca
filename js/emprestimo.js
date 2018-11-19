@@ -535,11 +535,3 @@ function montarTabelaComFiltro(filtro) {
         });
     });
 }
-
-
-function teclaEnter(event) {
-    let tecla = event.key;
-    if (tecla == "Enter") {
-        pesquisar();
-    }
-}
