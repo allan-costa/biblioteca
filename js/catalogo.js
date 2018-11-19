@@ -170,7 +170,7 @@ function criarExemplares(catalogo) {
             id: newID,
             catalogo: { "id": catalogo.id, "titulo": catalogo.titulo },
             situacao: 'Disponivel',
-            autor: { "id": catalogo.autorId, "titulo": catalogo.autorNome },
+            autor: { "id": catalogo.autor.id, "nome": catalogo.autor.nome },
             tombo: null,
             consulta: false
         }
